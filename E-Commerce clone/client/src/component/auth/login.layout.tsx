@@ -2,21 +2,25 @@ import { useLoginUser } from "@/store/auth.store/auth-store";
 import { useNavigate } from "react-router";
 function LoginLayout() {
   const { email, password, setEmail, setPassword ,onSubmit} = useLoginUser();
-  const navigate = useNavigate();
-
-  const handleLogin = async() => {
-    const user = await onSubmit();
-
+  const navigate = useNavigate() ;
+  async function handleClick(){
+    const user = await onSubmit() ;
+    // user is object of {email , username , role} 
     if(!user){
-      return;
+      return ;
     }
+    if(user?.role === 'admin'){
+      // redirect to some route 
+      navigate('/admin/dashboard') ;
+      return ;
 
-    if(user.role === "admin"){
-      navigate("/admin/dashboard");
-      return;
     }
+    if(user?.role === 'client'){
+      // redirect to some other url 
+      navigate('/shop/home') ;
+    }
+    return ;
 
-    navigate("/shop/home");
   }
 
   return (
@@ -40,7 +44,7 @@ function LoginLayout() {
         </form>
         <button
           className={`bg-black text-white rounded-2xl cursor-pointer py-1 px-2`}
-          onClick={handleLogin}
+          onClick={handleClick}
         >
           Submit
         </button>

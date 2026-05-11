@@ -71,11 +71,11 @@ export const useLoginUser = create<StateLogin>((set,get)=>({
                 email : get().email,
                 password : get().password
             },{withCredentials:true});
-            const user = await useAuthMiddleware.getState().checkAuth();
+            const user = await  useAuthMiddleware.getState().checkAuth();
             set({
                 email : "",
                 password : "",
-            });
+            })
             return user;
         }
         catch(e){
@@ -94,23 +94,20 @@ type AuthState = {
     isLoading : boolean,
     checkAuth : ()=>Promise<AuthUser | null>,
 }
+
 export const useAuthMiddleware = create<AuthState>((set)=>({
     user : null,
     isAuthenticated : false,
     isLoading : true,
-    checkAuth : async() => {
-        set({
-            isLoading : true,
-        });
+    checkAuth : async ()=>{
         try{
             const res = await axios.get(`${API_URL}/check-auth`,{withCredentials:true});
-            const user = res.data.user as AuthUser;
             set({
-                user:user,
-                isAuthenticated : res.data.isAuthenticated,
-                isLoading : false,
+                user : res.data.user,
+                isAuthenticated:true,
+                isLoading:false,
             })
-            return user;
+            return res.data.user ;
         }
         catch(e){
             set({
@@ -119,7 +116,6 @@ export const useAuthMiddleware = create<AuthState>((set)=>({
                 isLoading : false,
             })
             console.log(e) ;
-            return null;
         }
     }
 }))

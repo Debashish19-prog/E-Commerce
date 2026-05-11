@@ -69,43 +69,28 @@ async function logoutUser(req:Request,res:Response) {
     });
 }
 async function authmiddleware(req:Request,res:Response,next:NextFunction){
-    // need to validate the token basically 
-    // const token:string | undefined = req.cookies?.token; 
-    // // check if the token exists 
-    // if(!token){
-    //     res.status(401).json({
-    //         msg : 'token doesnot exists',
-    //     })
-    //     return ;
-    // }
-    // try{
-    //     const decoded:string = jwt.verify(token,'123') ; // user id
-    //     if(!decoded){
-    //         res.status(401).json({
-    //             msg : 'decoded not available!!!',
-    //         })
-    //         return ;
-    //     }
-    //     // need to check if decoded is the username 
-    //     const isUserExists = await userModel.findById(decoded) ;
-    //     if(!isUserExists){
-    //         res.status(401).json({
-    //             msg : 'User doesnot exists',
-    //         })
-    //         return ;
-    //     }
-    //     // res.json({
-    //     //     msg : 'user exists' , 
-    //     //     user: isUserExists,
-    //     // })
-    //     req.user = isUserExists;
-    //     next() ;
-    // }
-    // catch(e){
-    //     res.status(401).json({
-    //         msg : 'invalid or expired token',
-    //     });
-    //     return ;
-    // }
+   const token:string | null = req.cookies.token ;
+   if(!token){
+        res.status(404).json({
+            msg : 'token not available' ,
+        })
+        return ;
+   }
+   const decoded : string | null = jwt.verify(token , '123') ;
+   if(!decoded){
+    res.status(404).json({
+        msg : 'decoded not available'
+    })
+    return ;
+   }
+   const isUserExists= await userModel.findById(decoded) ;
+   if(!isUserExists){
+    res.status(404).json({
+        msg : 'user not found' ,
+    })
+    return ;
+   }
+   req.user = isUserExists;
+   next() ;
 }
 module.exports={authRegister,loginUser,logoutUser,authmiddleware}
