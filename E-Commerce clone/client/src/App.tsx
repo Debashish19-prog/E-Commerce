@@ -27,9 +27,9 @@ function App(){
             <Route path='dashboard' element={<Dashboard/>} ></Route>
           </Route>
           {/* <Route path='/admin/dashboard' element={<Dashboard/>}></Route> */}
-          {/* <Route path='/shop' element={<ProtectedRoute allowedRoles={['client']}/>}>
+          <Route path='/shop' element={<ProtectedRoute allowedRoles={['client']}/>}>
             <Route path='/home' element={<Home/>}></Route>
-          </Route> */}
+          </Route>
         </Routes>
       </div>
     </>

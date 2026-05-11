@@ -4,9 +4,9 @@ import { useAuthMiddleware } from "@/store/auth.store/auth-store";
 type ProtectedRouteProps={
     allowedRoles?:Array<"client" | "admin">
 }
-async function ProtectedRoute({allowedRoles}:ProtectedRouteProps){
-    const {isAuthenticated,isLoading,checkAuth} = useAuthMiddleware() ;
-    const user = await checkAuth() ;
+function ProtectedRoute({allowedRoles}:ProtectedRouteProps){
+    const {isAuthenticated,isLoading,user} = useAuthMiddleware() ;
+    // const user = await checkAuth() ;
     if(isLoading){
         return <div>Loading...</div>
     } 
