@@ -1,3 +1,4 @@
+'use client'
 import { Outlet ,Navigate} from "react-router";
 import { useAuthMiddleware } from "@/store/auth.store/auth-store";
 type ProtectedRouteProps={

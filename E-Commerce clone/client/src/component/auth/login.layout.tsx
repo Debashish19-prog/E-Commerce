@@ -7,18 +7,24 @@ function LoginLayout() {
     const user = await onSubmit() ;
     // user is object of {email , username , role} 
     if(!user){
+      console.log('No User found!!!' ) ;
       return ;
     }
     if(user?.role === 'admin'){
       // redirect to some route 
+      console.log("User role is admin") ;
+      console.log(user) ;
       navigate('/admin/dashboard') ;
       return ;
 
     }
     if(user?.role === 'client'){
       // redirect to some other url 
+      console.log("User role is client") ;
+      console.log(user) ;
       navigate('/shop/home') ;
     }
+    console.log(`default user : ${user}`) ;
     return ;
 
   }
