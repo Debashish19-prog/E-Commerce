@@ -14,7 +14,7 @@ function LoginLayout() {
       // redirect to some route 
       console.log("User role is admin") ;
       console.log(user) ;
-      navigate('/admin/dashboard') ;
+      navigate('/admin') ;
       return ;
 
     }

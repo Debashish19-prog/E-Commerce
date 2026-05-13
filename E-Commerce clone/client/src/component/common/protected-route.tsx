@@ -16,10 +16,8 @@ function ProtectedRoute({allowedRoles}:ProtectedRouteProps){
     if(isAuthenticated && user && !allowedRoles?.includes(user.role)){
         return <Navigate to='/unauth'/>
     }
-    return (
-        <>
-            <Outlet/>
-        </>
-    )
+    console.log(`Protected route -> Outlet`) ;
+    return <Outlet/>
+    
 }
 export default ProtectedRoute;
