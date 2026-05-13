@@ -8,6 +8,8 @@ import ProtectedRoute from "./component/common/protected-route";
 import Dashboard from "./pages/admin-view/dashboard";
 import Home from "./pages/shopping-view/home";
 import AdminLayout from "./component/admin-view/AdminLayout";
+import Products from "./pages/admin-view/products";
+import Orders from "./pages/admin-view/orders";
 function App(){
   const { checkAuth } = useAuthMiddleware();
 
@@ -27,16 +29,16 @@ function App(){
           </Route>
 
 
-          <Route path='/admin' element={<ProtectedRoute allowedRoles={['admin']}/>}>
-            <Route index element={<AdminLayout/>}>
-              {/* <Route path='dashboard' element={<Dashboard/>} ></Route> */}
-            </Route>
-            
+          <Route path='/admin' element={<ProtectedRoute allowedRoles={["admin"]}>
+            <AdminLayout></AdminLayout>
+          </ProtectedRoute>}>
+            <Route path='dashboard' element={<Dashboard/>}></Route>
+            <Route path='products' element={<Products/>}></Route>
+            <Route path = 'orders' element={<Orders/>}></Route>
           </Route>
-          {/* <Route path='/admin/dashboard' element={<Dashboard/>}></Route> */}
-          <Route path='/shop' element={<ProtectedRoute allowedRoles={['client']}/>}>
+          {/* <Route path='/shop' element={<ProtectedRoute allowedRoles={['client']}/>}>
             <Route path='home' element={<Home/>}></Route>
-          </Route>
+          </Route> */}
         </Routes>
       </div>
     </>

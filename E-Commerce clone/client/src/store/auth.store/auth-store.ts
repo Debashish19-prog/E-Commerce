@@ -119,3 +119,14 @@ export const useAuthMiddleware = create<AuthState>((set)=>({
         }
     }
 }))
+type LogOutState={
+    onClick : ()=> Promise<void>,
+}
+export const useLogout = create<LogOutState>(()=>({
+    onClick : async()=>{
+        const res = await axios.post(`${API_URL}/logout`,{},{
+            withCredentials:true,
+        });
+        console.log(res.data)  ;
+    },
+}))

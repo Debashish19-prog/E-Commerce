@@ -1,10 +1,10 @@
 'use client'
 import { Outlet ,Navigate} from "react-router";
 import { useAuthMiddleware } from "@/store/auth.store/auth-store";
-type ProtectedRouteProps={
-    allowedRoles?:Array<"client" | "admin">
-}
-function ProtectedRoute({allowedRoles}:ProtectedRouteProps){
+// type ProtectedRouteProps={
+//     allowedRoles?:Array<"client" | "admin">
+// }
+function ProtectedRoute({allowedRoles,children}:{allowedRoles?:Array<"client" | "admin">,children:React.ReactNode}){
     const {isAuthenticated,isLoading,user} = useAuthMiddleware() ;
     // const user = await checkAuth() ;
     if(isLoading){
@@ -17,7 +17,9 @@ function ProtectedRoute({allowedRoles}:ProtectedRouteProps){
         return <Navigate to='/unauth'/>
     }
     console.log(`Protected route -> Outlet`) ;
-    return <Outlet/>
+    return (
+        <>{children}</>
+    )
     
 }
 export default ProtectedRoute;

@@ -6,12 +6,10 @@ function AdminLayout(){
     return (
         <>
             <div className={`w-full min-h-screen flex `}>
-                <div>
-                    <AdminSidebar/>
-                </div>
-                <div className={`flex flex-col `}>
+                <AdminSidebar/>
+                <div className={`flex flex-col flex-1`}>
                     <AdminHeader/>
-                    {/* <Outlet/> */}
+                    <Outlet/>
                 </div>  
             </div>
         </>
