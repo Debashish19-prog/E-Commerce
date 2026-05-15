@@ -25,7 +25,7 @@ export async function addproduct(req:Request,res:Response) {
     const product = await ProductModel.create({
         imageurl , title , description , stocks , price , brand ,category
     });
-    console.log('hey my name is typescript and c++') ;
+    console.log('hey my name is typescript and c++ and i hope this is fixed') ;
     res.status(201).json({
         product,
     })
