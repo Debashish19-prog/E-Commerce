@@ -3,6 +3,7 @@ const mongoose = require('mongoose') ;
 const authRouter = require('./routes/auth/auth-route') ;
 const cookieParser = require('cookie-parser') ;
 const cors = require('cors') ; 
+import productRouter from './routes/admin/product-route'
 require('dotenv').config() ;
 const app = express() ;
 app.use(express.json()) ; // middleware for json data
@@ -30,7 +31,9 @@ async function connectdb(){
 }
 connectdb() ;
 
+
 app.use('/',authRouter) ;
+app.use('/admin',productRouter);
 
 const PORT = process.env.PORT || 3000 ;
 app.listen(PORT,()=>{
